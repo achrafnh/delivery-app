@@ -1,1 +1,1 @@
-# Delivery App - Full Stack Project
+# Full Delivery App Template

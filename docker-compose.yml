@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: delivery-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/delivery
+      - JWT_SECRET=supersecretkey
+      - PORT=3000
+    depends_on:
+      - mongo
+
+  admin:
+    build: ./admin
+    container_name: delivery-admin
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./admin:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo
+    container_name: delivery-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
