@@ -54,10 +54,16 @@
 
 const express = require("express");
 const router = express.Router();
-const { createOrder, updateOrderStatus } = require("../controllers/orderController");
+const {  createOrder,
+  updateOrderStatus,
+  assignDriver,
+  getOrders,
+  getOrderById } = require("../controllers/orderController");
 const auth = require("../middlewares/auth");
 
 router.post("/", auth, createOrder);
 router.put("/:id/status", auth, updateOrderStatus);
-
+router.put("/:id/assign", auth, assignDriver); // <-- Ajouté
+router.get("/", auth, getOrders);              // <-- Ajouté
+router.get("/:id", auth, getOrderById);        // <-- Ajouté
 module.exports = router;
