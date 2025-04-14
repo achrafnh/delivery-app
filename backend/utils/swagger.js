@@ -7,12 +7,26 @@ const options = {
     info: {
       title: "Delivery API",
       version: "1.0.0",
-      description: "API documentation for Uber-like delivery system",
+      description: "API documentation for delivery service",
     },
-    servers: [{ url: "http://localhost:3000/api" }],
+    servers: [
+      {
+        url: "http://localhost:3000/api",
+      },
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [{ bearerAuth: [] }],
   },
-  apis: ["./routes/*.js"], // ← chemins vers tes fichiers d’API
+  apis: ["./routes/*.js"],
 };
 
-const specs = swaggerJsDoc(options);
-module.exports = specs;
+const swaggerSpec = swaggerJsDoc(options);
+module.exports = swaggerSpec;

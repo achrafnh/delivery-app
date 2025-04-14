@@ -24,14 +24,12 @@ app.use('/api/users', userRoutes);
 app.use('/api/restaurants', restaurantRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/drivers', driverRoutes);
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./utils/swagger");
+
 
 app.get('/', (req, res) => res.send('API is running'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpecs = require("./utils/swagger");
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
