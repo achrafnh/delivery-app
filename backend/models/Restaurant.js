@@ -1,7 +1,9 @@
-const mongoose = require('mongoose');
-const RestaurantSchema = new mongoose.Schema({
+const mongoose = require("mongoose");
+
+const restaurantSchema = new mongoose.Schema({
   name: String,
   address: String,
-  vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-});
-module.exports = mongoose.model('Restaurant', RestaurantSchema);
+  phone: String
+}, { timestamps: true });
+
+module.exports = mongoose.model("Restaurant", restaurantSchema);

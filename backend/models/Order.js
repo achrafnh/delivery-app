@@ -1,14 +1,11 @@
-const mongoose = require('mongoose');
-const OrderSchema = new mongoose.Schema({
-  customer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' },
-  items: [{
-    menuItem: { type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' },
-    quantity: Number
-  }],
-  totalPrice: Number,
-  status: { type: String, enum: ['placed','accepted','in_transit','delivered'], default: 'placed' },
-  driver: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
-  placedAt: { type: Date, default: Date.now }
-});
-module.exports = mongoose.model('Order', OrderSchema);
+const mongoose = require("mongoose");
+
+const orderSchema = new mongoose.Schema({
+  customerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  restaurantId: { type: mongoose.Schema.Types.ObjectId, ref: "Restaurant" },
+  items: [String],
+  total: Number,
+  status: { type: String, enum: ["pending", "preparing", "delivering", "completed"], default: "pending" }
+}, { timestamps: true });
+
+module.exports = mongoose.model("Order", orderSchema);

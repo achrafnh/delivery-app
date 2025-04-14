@@ -1,15 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Restaurant = require('../models/Restaurant');
+const { getRestaurants } = require("../controllers/restaurantController");
 
-router.get('/', async (req, res) => {
-  const restaurants = await Restaurant.find();
-  res.json(restaurants);
-});
-
-router.post('/', async (req, res) => {
-  const restaurant = await Restaurant.create(req.body);
-  res.status(201).json(restaurant);
-});
+router.get("/", getRestaurants);
 
 module.exports = router;
